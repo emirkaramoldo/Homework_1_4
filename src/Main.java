@@ -5,9 +5,9 @@ public class Main {
     public static int bossHealth = 700;
     public static int bossDamage = 100;
     public static String bossDefence;
-    public static int[] heroesHealth = {270, 260, 250, 200};
-    public static int[] heroesDamage = {15, 20, 25, 5};
-    public static String[] heroesAttackType = {"Physical", "Magical", "Kinetic", "Medic"};
+    public static int[] heroesHealth = {270, 260, 250, 700, 200, 300, 230, 400};
+    public static int[] heroesDamage = {15, 20, 25, 5, 10, 15, 5, 0};
+    public static String[] heroesAttackType = {"Physical", "Magical", "Kinetic", "Golem", "Lucky", "Medic", "Thor", "Witcher"};
     public static int roundNumber = 0;
 
     public static void main(String[] args) {
@@ -30,6 +30,7 @@ public class Main {
         printBossDamage();
         bossHits();
         heroesHit();
+        golemTakeDamage();
         medicHealing();
         printStatistics();
     }
@@ -69,6 +70,21 @@ public class Main {
         }
     }
 
+    public static void golemTakeDamage() {
+        int takeDamage = bossDamage / 5;
+        int aliveHeroes = 0;
+        for (int i = 0; i < heroesHealth.length; i++) {
+            if (heroesHealth[i] > 0 && heroesHealth[3] > 0) {
+                aliveHeroes++;
+                heroesHealth[i] += takeDamage;
+                heroesHealth[3] -= bossDamage - (takeDamage * aliveHeroes);
+                if (heroesHealth[3] < 0) {
+                    heroesHealth[3] = 0;
+                }
+            }
+        }
+        System.out.println("Голем поглотил " + (takeDamage * aliveHeroes));
+    }
 
     public static boolean isGameFinished() {
         if (bossHealth <= 0) {
