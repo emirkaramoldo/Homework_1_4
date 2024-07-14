@@ -33,6 +33,7 @@ public class Main {
         missLucky();
         golemTakeDamage();
         medicHealing();
+        witcherRevive();
         printStatistics();
     }
 
@@ -96,7 +97,18 @@ public class Main {
         }
     }
 
-
+    public static void witcherRevive() {
+        if (heroesHealth[7] > 0) {
+            for (int i = 0; i < heroesHealth.length; i++) {
+                if (heroesHealth[i] <= 0 && i != 7) {
+                    heroesHealth[i] = heroesHealth[7];
+                    heroesHealth[7] = 0;
+                    System.out.println("Ведьмак оживил героя, отдав ему свою жизнь");
+                    break;
+                }
+            }
+        }
+    }
 
     public static boolean isGameFinished() {
         if (bossHealth <= 0) {
