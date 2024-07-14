@@ -27,6 +27,7 @@ public class Main {
     public static void playRound() {
         roundNumber++;
         chooseBossDefence();
+        thorSlam();
         printBossDamage();
         bossHits();
         heroesHit();
@@ -94,6 +95,17 @@ public class Main {
         if (luck && heroesHealth[4] > 0) {
             heroesHealth[4] += bossDamage;
             System.out.println("Везучий увернулся от атаки");
+        }
+    }
+
+    public static void thorSlam() {
+        Random random = new Random();
+        boolean slam = random.nextBoolean();
+        if (heroesHealth[6] > 0 && slam) {
+            bossDamage = 0;
+            System.out.println("Тор оглушил босса");
+        } else {
+            bossDamage = 50;
         }
     }
 
