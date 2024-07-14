@@ -30,6 +30,7 @@ public class Main {
         printBossDamage();
         bossHits();
         heroesHit();
+        missLucky();
         golemTakeDamage();
         medicHealing();
         printStatistics();
@@ -85,6 +86,17 @@ public class Main {
         }
         System.out.println("Голем поглотил " + (takeDamage * aliveHeroes));
     }
+
+    public static void missLucky() {
+        Random random = new Random();
+        boolean luck = random.nextBoolean();
+        if (luck && heroesHealth[4] > 0) {
+            heroesHealth[4] += bossDamage;
+            System.out.println("Везучий увернулся от атаки");
+        }
+    }
+
+
 
     public static boolean isGameFinished() {
         if (bossHealth <= 0) {
